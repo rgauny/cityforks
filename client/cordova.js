@@ -1,9 +1,8 @@
 Meteor.startup(function(){
    navigator.geolocation.getCurrentPosition(function(position){
-            console.log(position);
-            Session.set('location', position);
-            var test = Session.get('location');
-            console.log(test);
+            var pos = {latitude:position.coords.latitude,longitude: position.coords.longitude};
+            Session.set('location',pos);
+            Meteor.call("fetchNearbyLocations", pos);
         });
 });
 
